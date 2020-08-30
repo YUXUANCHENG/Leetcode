@@ -11,22 +11,11 @@ public:
         std::vector<int> ans(size + 1, 0);
         while (size >= 0)
         {
-            if (s1.empty())
+            while (!s1.empty() && T.at(size) >= T.at(s1.top()))
             {
-                ans.at(size) = 0;
+                s1.pop();
             }
-            else if (T.at(size) > T.at(s1.top()))
-            {
-                while (!s1.empty() && T.at(size) > T.at(s1.top()))
-                {
-                    s1.pop();
-                }
-                ans.at(size) = !s1.empty() ? s1.top() - size : 0;
-            }
-            else
-            {
-                ans.at(size) = s1.top() - size;
-            }
+            ans.at(size) = !s1.empty() ? s1.top() - size : 0;
             s1.push(size);
             size--;
         }
